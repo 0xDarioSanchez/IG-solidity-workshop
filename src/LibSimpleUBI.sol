@@ -41,24 +41,4 @@ library LibSimpleUBI {
         if (missedDays == 0) return 0;
         return missedDays * dailyAmount;
     }
-
-    /// @notice Format address to a short string for display
-    /// @param addr The address to format
-    /// @return A truncated string representation
-    function toShortString(address addr) internal pure returns (string memory) {
-        bytes memory addrBytes = abi.encodePacked(addr);
-        bytes memory result = new bytes(10);
-        
-        for (uint i = 0; i < 4; i++) {
-            result[i] = addrBytes[i];
-        }
-        result[4] = '.';
-        result[5] = '.';
-        result[6] = '.';
-        for (uint i = 0; i < 3; i++) {
-            result[7 + i] = addrBytes[17 + i];
-        }
-        
-        return string(result);
-    }
 }
