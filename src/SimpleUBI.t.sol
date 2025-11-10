@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity =0.8.28;
 
 import {Test} from "forge-std/Test.sol";
@@ -9,13 +10,12 @@ contract SimpleUBITest is Test {
     ERC20Impl token;
 
     function setUp() public {
-        ubi = new SimpleUBI(true);
-        token = new ERC20Impl("name", "symbol", address(this));
-        ubi.initialize(1, address(token));
-        token.transferOwnership(address(ubi));
+        // SimpleUBI constructor: (name, symbol, dailyClaimAmount, initialOwner)
+        ubi = new SimpleUBI("UBI Token", "UBI", 1 ether, address(this));
+        token = new ERC20Impl("Test Token", "TST", address(this));
     }
 
     function test_Ownership() public view {
-        assertEq(address(token.owner()), address(ubi));
+        assertEq(address(ubi.owner()), address(this));
     }
 }
